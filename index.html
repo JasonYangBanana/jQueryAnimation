@@ -30,16 +30,39 @@
     <div class="container" id="container2">Click me quickly (with ba-throttle-debounce.js)
         <div class="item item2">Fucking Kai show up Fucking Lai show up Fucking Kai show up Fucking Kai show up Fucking Kai show up Fucking Kai show up Fucking Kai show up</div>
     </div>
+    <div class="container" id="container3">Click me quickly (by myself)
+        <div class="item item3">Fucking Kai show up Fucking Lai show up Fucking Kai show up Fucking Kai show up Fucking Kai show up Fucking Kai show up Fucking Kai show up</div>
+    </div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="./jquery.ba-throttle-debounce.js"></script>
 <script>
+
+function debounce(func, wait = 300, immediate = true) {
+    var timeout;
+    return function () {
+        var context = this,
+            args = arguments;
+        var later = function () {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+
 $(document).ready(function(){
     $('#container1').click(function() {
         $('.item1').slideToggle()
     })
     $('#container2').click($.debounce(250, function () {
         $('.item2').slideToggle()
+    }))
+    $('#container3').click(debounce(function () {
+        $('.item3').slideToggle()
     }))
 })
 
