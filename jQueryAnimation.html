@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>jQueryAnimation</title>
+</head>
+<style>
+    body {
+        display: flex;
+        justify-content: space-around;
+    }
+    .container {
+        width: 300px;
+        height: 500px;
+        outline: solid 1px black;
+    }
+    .item {
+        margin-top: 200px;
+        width: 200px;
+        height: 200px;
+        display: none;
+    }
+</style>
+<body>
+    <div class="container" id="container1">Click me quickly (without debounce)
+        <div class="item item1">Fucking Kai show up Fucking Lai show up Fucking Kai show up Fucking Kai show up Fucking Kai show up Fucking Kai show up Fucking Kai show up</div>
+    </div>
+    <div class="container" id="container2">Click me quickly (with ba-throttle-debounce.js)
+        <div class="item item2">Fucking Kai show up Fucking Lai show up Fucking Kai show up Fucking Kai show up Fucking Kai show up Fucking Kai show up Fucking Kai show up</div>
+    </div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="./jquery.ba-throttle-debounce.js"></script>
+<script>
+$(document).ready(function(){
+    $('#container1').click(function() {
+        $('.item1').slideToggle()
+    })
+    $('#container2').click($.debounce(250, function () {
+        $('.item2').slideToggle()
+    }))
+})
+
+</script>
+</html>
